@@ -44,4 +44,3 @@ To tear down and populate the database, run:
 
 ## Notes
 See Glossary for more info on Scrum Lord.
-# Auction
