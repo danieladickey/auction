@@ -1,0 +1,71 @@
+{% extends "auction/manager.html" %}
+{% load static %}
+
+{% block title %}
+    Add winner
+{% endblock %}
+
+{% block center %}
+
+    <a class="myButton" href="javascript:history.go(-1);">Back</a><br><br>
+
+    <div id="auction">
+        {% if items.count > 0 %}
+            {% for i in items %}
+                <div class="item">
+                    <div class="myBox">
+                        <div class="photo">
+                            <img src="{{ i.photo.url }}" alt="Photo of {{ item.name }}">
+                        </div>
+                        <div class="myFrame">
+                            <div class="addWinner">
+                                <form action="{% url 'auction:makeLiveItemWinner' i.id %}" method="post">
+                                    {% csrf_token %}
+                                    <h4>Enter Winner Info:</h4>
+                                    <table id="myTable">
+                                        <tr>
+                                            <label>
+                                                <td>User ID:</td>
+                                                <td><input class="myHun" type="number" name="userID" min="0"
+                                                        placeholder="#" required="required" ></td>
+                                            </label></tr>
+                                        <tr><label>
+                                            <td>Winning Bid:</td>
+                                            <td><input class="myHun" type="number" step="1" name="price" min="{{ i.startingPrice }}"
+                                                    placeholder="$" required="required"></td>
+                                        </label></tr>
+                                    </table>
+                                    <br>
+                                    <div class="center">
+                                        <label>
+                                            <select name="auction">
+                                                {% for a in auctions %}
+                                                    <option value="{{ a.id }}">{{ a }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </label>
+                                        <input id="blueBackground" type="submit" value="Submit">
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <b class="white">Item:</b> {{ i.name }} <br>
+                        <b class="white">Price:</b> ${{ i.currentPrice }} <br>
+                        <b class="white">Auction:</b> Live <br>
+                        <b class="white">Order:</b> {{ i.positionInAuction }} <br>
+                        <b class="white">Description:</b> {{ i.description }} <br>
+                    </div>
+                </div>
+
+                </a>
+                <br><br>
+            {% endfor %}
+        {% else %}
+            <h4>There are no live items to add winners for.</h4>
+        {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'auction/nav.html' %}
+{% load static %}
+
+<head>
+    {% block title %}Sign Up{% endblock %}
+</head>
+
+
+{% block content %}
+
+    <div id="register">
+        <h3>Sign Up</h3>
+
+        {% if form.non_field_errors %}
+        <ul class='form-errors'>
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+            {% else %}
+                <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            You are already logged in, there is no need to log in again.<br>
+            <a href="{% url 'auction:user' %}">Click here to visit your account.</a> 
+        {% else %}
+            <form method="post" action="{% url 'auction:signup' %}">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password1.label_tag }}</td>
+                        <td>{{ form.password1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password2.label_tag }}</td>
+                        <td>{{ form.password2 }}</td>
+                    </tr>
+                    {% for field in form %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p style="color: red;">{{error}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor%}
+                </table><br>
+                {% if auction.count > 0 %}
+                    <h4>What auction is this for?</h4>
+                    {% csrf_token %}
+                    <label>
+                        <select name="auction">
+                            {% for i in auction %}
+                                <option value="{{ i.id }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </label><br><br>
+                {% endif %}
+                <input type="submit" value="Signup"/>
+                <br><br>
+                <a class="myButton" href="{% url 'login' %}">Already have an account? Click here</a>
+
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

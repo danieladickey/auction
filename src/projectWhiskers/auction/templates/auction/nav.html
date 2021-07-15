@@ -1,0 +1,142 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{% static 'auction/images/eagle.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'auction/style.css' %}">
+
+    <title>Auction - {% block title %}{% endblock title %}</title>
+</head>
+<body>
+<div class="no-print">
+    <div id="header" class="hiddenWhenMobile">
+        <a href="{% url 'auction:home' %}"><h1>Fundraiser Auction</h1></a>
+    </div>
+
+    <div class="nav hiddenWhenMobile">
+        <ul>
+            <li><a href="{% url 'auction:id' %}">My ID</a></li>
+            <li><a href="{% url 'auction:allItems' 0 0 %}">View Items</a></li>
+            <li><a href="{% url 'auction:silentItem' 0 0 %}">Silent Auction</a></li>
+            <li><a href="{% url 'auction:liveItem' 0 0 %}">Live Auction</a></li>
+            <li><a href="{% url 'auction:contact' %}">Contact</a></li>
+            <li><a href="{% url 'auction:user' %}">Account</a></li>
+            {% if user.manager %}
+                <li><a href="{% url 'auction:manager' %}">Manage</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <div class="tooltip">
+                    <li><a href="{% url 'auction:user' %}">[<span
+                            class="blue">{{ user.bidder.notifications.all.count }}</span>]</a></li>
+                    <span class="toolTipText">Notification(s)</span></div>
+            {% endif %}
+            {% block additional %}{% endblock %}
+        </ul>
+    </div>
+
+    <div class="mobileNavigation">
+
+        <div class="dropdown viewWhenMobile">
+            <div class="dropButton" id="hamburger">
+                <div class="ham"></div>
+                <div class="ham"></div>
+                <div class="ham"></div>
+            </div>
+            <div class="dropdown-content">
+                <a href="{% url 'auction:id' %}">My ID</a>
+                <div class="sub">
+                    <a class="subButton">View Items</a>
+                    <div class="sub-content">
+                        <a href="{% url 'auction:allItems' 0 0 %}">All Items</a>
+                        <a href="{% url 'auction:silentItem' 0 0 %}">Silent Auction</a>
+                        <a href="{% url 'auction:liveItem' 0 0 %}">Live Auction</a>
+                    </div>
+                </div>
+
+                <a href="{% url 'auction:contact' %}">Contact</a>
+
+                <div class="sub">
+                    <a class="subButton">Account</a>
+                    <div class="sub-content">
+                        <a class="subitem" href="{% url 'auction:user' %}">My Profile</a>
+                        <a class="subitem" href="{% url 'auction:myBidding' %}">My Bidding</a>
+                        <a class="subitem" href="{% url 'auction:myWinning' %}">My Winning</a>
+                        <a class="subitem" href="{% url 'auction:myWon' %}">My Won</a>
+                        <a class="subitem" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+
+                {% if user.manager %}
+                    <div class="sub">
+                        <a class="subButton">Manage</a>
+                        <div class="sub-content">
+                            <a class="subitem" href="{% url 'auction:manager' %}">Manager Profile</a>
+                            <a class="subitem" href="{% url 'auction:addAuction' %}">Add Auction</a>
+                            <a class="subitem" href="{% url 'auction:addBidder' %}">Add Bidder</a>
+                            <a class="subitem" href="{% url 'auction:removeBidder' %}">Remove Bidder</a>
+                            <a class="subitem" href="{% url 'auction:addItem' %}">Add Item</a>
+                            <a href="{% url 'auction:liveItemWinner' %}">Add Winners</a>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <a class="myLink" href="{% url 'auction:home' %}"><h1 id="mobileHeader">Auction</h1></a>
+        {% if user.is_authenticated %}
+            <a id="notification" class="mobileOnly"
+               href="{% url 'auction:user' %}">
+                <b class="yellow">[</b>
+                <div class="number">{{ user.bidder.notifications.all.count }}</div>
+                <b class="yellow">]</b>
+            </a>
+        {% endif %}
+    </div>
+
+    <h1 id="mySpacer"></h1>
+</div>
+
+<div id="myContent">
+    {% block content %}{% endblock %}
+</div>
+</body>
+<script>
+    let width = window.innerWidth;
+    if (width < 1000) {
+        for (let i = 0; i < document.getElementsByClassName('info').length; i++) {
+            document.getElementsByClassName('info')[i].style.padding = "0px 10px 10px 10px";
+        }
+        for (let i = 0; i < document.getElementsByClassName('photo').length; i++) {
+            document.getElementsByClassName('photo')[i].style.padding = "10px 10px 8px 10px";
+        }
+        for (let i = 0; i < document.getElementsByClassName('myFrame').length; i++) {
+            document.getElementsByClassName('myFrame')[i].style.padding = "0px 10px 10px 10px";
+        }
+        for (let i = 0; i < document.getElementsByClassName('myBox').length; i++) {
+            document.getElementsByClassName('myBox')[i].style.width = "320px";
+        }
+    }
+
+    let myButton = document.getElementById("backToTop");
+
+    if (myButton) {
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                myButton.style.display = "block";
+
+            } else {
+                myButton.style.display = "none";
+            }
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,10 @@
+venv
+.DS_Store
+.vscode
+db.sqlite3
+__pycache__
+*.pyc
+*.zip
+.idea/
+src/projectWhiskers/media/auction
+0001_initial.py

@@ -1,0 +1,55 @@
+{% extends 'auction/user.html' %}
+{% load static %}
+
+{% block title %}
+    Won
+{% endblock %}
+
+{% block center %}
+    <div name="wonItems">
+        {% if total > 0 %}
+            <div class="total">
+                <h4>Total amount I owe is ${{ total }}</h4>
+            </div>
+            <br><br>
+        {% endif %}
+        {% if user.bidder.itemsWon.all.count > 0 %}
+            <div class="boxed">
+
+                {% if silentTotal > 0 %}
+                    <h5>The total price of silent items is ${{ silentTotal }}</h5>
+                {% endif %}
+
+                <h5>Silent Items Won:</h5><br>
+                <ol>
+                    {% for item in user.bidder.itemsWon.all %}
+                        <li><a class="myLink blue"
+                               href="{% url 'auction:viewItem' item.id item.itemType %}">{{ item.name }} -
+                            ${{ item.currentPrice }}</a></li>
+                        <br>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endif %}
+        <br>
+        {% if user.bidder.liveItemsWon.all.count > 0 %}
+            <div class="boxed">
+            {% if liveTotal > 0 %}
+                <h5>The total price of live items is ${{ liveTotal }}</h5>
+            {% endif %}
+            <h5>Live Items Won:</h5><br>
+            <ol>
+                {% for item in user.bidder.liveItemsWon.all %}
+                    <li><a class="myLink blue" href="{% url 'auction:viewItem' item.id item.itemType %}">{{ item.name }}
+                        -
+                        ${{ item.currentPrice }}</a></li>
+                    <br>
+                {% endfor %}
+            </ol>
+        {% endif %}
+        </div>
+        {% if not user.bidder.itemsWon.all.count > 0 and not user.bidder.liveItemsWon.all.count > 0 %}
+            <h5>I have not won any items.</h5>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'auction/manager.html' %}
+{% load static %}
+
+{% block title %}
+    Add Auction
+{% endblock %}
+
+{% block center %}
+    <div name="addAuction">
+        {% if messageItem %}<p><strong>{{ messageItem }}</strong></p>{% endif %}
+
+        <h4>Create an Auction:</h4><br>
+        <form method="post" action="{% url 'auction:addAuction' %}">
+            {% csrf_token %}
+
+            Auction Name:<br>
+            <label>
+                <input type="text" name="auctionName" required>
+            </label><br><br>
+
+            Auction Start Time:<br>
+            <label>
+                <input type="date" name="startDate">
+            </label><br>
+            <label>
+                <input type="time" name="startTime">
+            </label><br><br>
+
+
+            Auction End Time:<br>
+            <label>
+                <input type="date" name="endDate">
+            </label><br>
+            <label>
+                <input type="time" name="endTime">
+            </label><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+        <br>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "auction/nav.html" %}
+{% load static %}
+
+{% block title %}
+    Report
+{% endblock %}
+
+{% block content %}
+    <p class="myError no-print">Please print this page for your records. </p><br><br>
+    <h3>{{ auction.auctionName }}</h3>
+    {{ auction.participants.count }} participant{% if auction.participants.count > 1 %}s{% endif %}
+
+    <br><br>
+    <div class="boxed">
+        <h4>Silent Items:</h4>
+    <ol>
+        {% for i in auction.silentItems.all %}
+            {% if i.currentPrice > i.startingPrice and i.sold %}
+                <li>{{ i }} sold to <i>{{ i.winner }}</i></li>
+            {% endif %}
+        {% endfor %}<br>
+    </ol>
+        <p class="total">For a total of ${{ silent }}.</p>
+    </div>
+    <br>
+    <div class="boxed">
+        <h4>Live Items:</h4>
+    <ol>
+        {% for i in auction.liveItems.all %}
+            {% if i.currentPrice > i.startingPrice and i.sold %}
+                <li>{{ i }} sold to <i>{{ i.winner }}</i></li>
+            {% endif %}
+        {% endfor %}<br>
+    </ol>
+        <p class="total">For a total of ${{ live }}.</p>
+    </div>
+    <br>
+
+    <p class="total">Grand total of ${{ total }} was raised.</p>
+{% endblock %}

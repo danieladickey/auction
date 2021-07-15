@@ -1,0 +1,81 @@
+{% extends "auction/nav.html" %}
+{% load static %}
+
+{% block title %}
+    Live Items
+{% endblock %}
+
+{% block content %}
+
+    <a id="backToTop" class="myButton" href="#top">Back to top</a>
+
+    <div class="center">
+        <form action="{% url 'auction:liveItem' 0 0%}" method="post">
+            {% csrf_token %}
+            <label>
+                <select name="auctionType">
+                    <option value="live">Auction type</option>
+                    <option value="all">All Items</option>
+                    <option value="silent">Silent</option>
+                    <option value="live">Live</option>
+                </select>
+            </label>
+
+            <label>
+                <select name="priceFilter">
+                    <option value="0">Price</option>
+                    <option value="0">All</option>
+                    <option value="9">0-$10</option>
+                    <option value="10">$10-$50</option>
+                    <option value="50">$50-$100</option>
+                    <option value="100">$100-$1000</option>
+                    <option value="101">$1000 and above</option>
+                </select>
+            </label>
+
+            <label>
+                <select name="numberOfItems">
+                    <option value="10">Number of Items</option>
+                    <option value="0">All</option>
+                    <option value="10">10</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </label>
+
+            <input type="submit" value="Filter">
+        </form>
+        <br>
+    </div>
+
+    <h2 class="auctionType center">Live Auction Items</h2><br>
+
+    <div id="auction">
+        {% for i in items %}
+            <a class="linkLink" href="{% url 'auction:viewItem' i.id i.itemType %}">
+                <div class="item">
+                    <div class="photo">
+                        <img src="{{ i.photo.url }}" alt="Photo of {{ item.name }}">
+                    </div>
+                    <div class="info">
+                        <b class="white">Item:</b> {{ i.name }} <br>
+                        <b class="white">Price:</b> ${{ i.startingPrice }} <br>
+                        <b class="white">Auction:</b> Live <br>
+                        <b class="white">Order:</b> {{ i.positionInAuction }} <br>
+                        <b class="white">Description:</b> {{ i.description }} <br>
+                    </div>
+                </div>
+            </a>
+            <br><br>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+

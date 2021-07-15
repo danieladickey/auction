@@ -1,0 +1,20 @@
+{% extends "auction/nav.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+    <div class="center">
+        <h3>Welcome to the annual Thomas Edison Charter School fundraiser auction!</h3>
+        <br><br>
+        {% if user.is_anonymous %}
+            <a class="myButton" href="{% url 'auction:signup' %}">Click here to sign up</a>
+            <br><br>
+
+            <a class="myButton" href="{% url 'login' %}">Click here to login</a>
+        {% endif %}
+    </div>
+
+{% endblock %}

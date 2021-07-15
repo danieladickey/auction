@@ -1,0 +1,28 @@
+{% extends "auction/nav.html" %}
+{% load static %}
+
+{% block title %}
+    Contact
+{% endblock %}
+
+{% block content %}
+
+    <div id="contact">
+        <table>
+            <tr>
+                <td><b>Name:</b></td>
+                <td>Aaron Kay</td>
+            </tr>
+            <tr>
+                <td><b>Email:</b></td>
+                <td><a href="mailto:kaychoro@gmail.com?Subject=T.E.C.S.%20Auction%20Website" target="_top">kaychoro@gmail.com</a>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Photo:</b><br><br><br><br><br><br><br><br><br><br><br><br><br></td>
+                <td><img id="aaron" src="{% static 'auction/images/AaronKay.jpg' %}" alt="Photo of contact"></td>
+            </tr>
+        </table>
+    </div>
+
+{% endblock %}

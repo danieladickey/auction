@@ -1,0 +1,35 @@
+{% extends 'auction/manager.html' %}
+{% load static %}
+
+{% block title %}
+    Remove Bidders
+{% endblock %}
+
+{% block center %}
+    <div name="removeBidders" class="center">
+        {% if bidder.count > 0 %}
+        <table style="width:100%">
+            <tr>
+                <th>Bidder Number</th>
+                <th>Bidder Username</th>
+                <th>Remove from All Auctions</th>
+            </tr>
+                {% for i in bidder %}
+                    <tr>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.user }}</td>
+                        <td>
+                            <form method="post" action="{% url 'auction:removeBidderFin' i.id %}">
+                                {% csrf_token %}
+                                <input type="submit" value="Remove">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+                <h4>There are no bidders to remove.</h4>
+        {% endif %}
+        <br>
+    </div>
+{% endblock %}

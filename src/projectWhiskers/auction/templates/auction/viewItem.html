@@ -1,0 +1,63 @@
+{% extends "auction/nav.html" %}
+{% load static %}
+
+{% block title %}
+    {{ item.name }}
+{% endblock %}
+
+{% block content %}
+
+    <a class="myButton" href="javascript:history.go(-1);">Back</a><br><br>
+
+    <div class="item">
+        {% if item.itemType == 'live' %}
+
+            <div class="item">
+                <div class="photo">
+                    <img src="{{ item.photo.url }}" alt="Photo of {{ item.name }}">
+                </div>
+                <div class="info">
+                    <b class="white">Item:</b> {{ item.name }} <br>
+                    <b class="white">Price:</b> ${{ item.startingPrice }} <br>
+                    <b class="white">Auction:</b> Live <br>
+                    <b class="white">Order:</b> {{ item.positionInAuction }} <br>
+                    <b class="white">Description:</b> {{ item.description }}
+                </div>
+            </div>
+
+        {% elif item.itemType == 'silent' %}
+
+            <div class="photo">
+                <img src="{{ item.photo.url }}" alt="Photo of {{ item.name }}">
+                <div class="myBid">
+                    <form action="{% url 'auction:newBid' item.id 'viewItemPage' %}" method="post">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            {% if timeOut %}
+                                <label>
+                                    <input class="bidNumber" type="number" step="1" name="bid"
+                                           min="{{ item.currentPrice }}" value="{{ item.currentPrice }}">
+                                </label>
+                                <input type="submit" value="Make Bid">
+                            {% else %}
+                                <p class="myError">This item has expired and bids have been disallowed.</p>
+                            {% endif %}
+                        {% else %}
+                            <a class="myLink" href="{% url 'login' %}"><p class="myError">Please sign in to make a
+                                bid.</p></a>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <div class="info">
+                <b class="white">Item:</b> {{ item.name }} <br>
+                <b class="white">Price:</b> ${{ item.currentPrice }} <br>
+                <b class="white">Auction:</b> Silent <br>
+                <b class="white">Description:</b> {{ item.description }}
+            </div>
+
+        {% endif %}
+    </div>
+    <br>
+
+{% endblock %}

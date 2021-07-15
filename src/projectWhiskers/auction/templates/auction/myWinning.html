@@ -1,0 +1,27 @@
+{% extends 'auction/user.html' %}
+{% load static %}
+
+{% block title %}
+    Winning
+{% endblock %}
+
+{% block center %}
+    <div name="currentWin">
+        {% if total > 0 %}
+            <h4>Current total I owe is ${{ total }}</h4><br>
+        {% endif %}
+        <h4 class="myList">Items I am currently winning:</h4><br>
+        <ol>
+            {% if user.bidder.winning.all.count > 0 %}
+                {% for item in user.bidder.winning.all %}
+                    <li><a class="myLink blue" href="{% url 'auction:viewItem' item.id item.itemType %}">{{ item.name }} -
+                        ${{ item.currentPrice }}</a></li>
+                    <br>
+                {% endfor %}
+            {% else %}
+                <h5>I am not winning any items</h5>
+            {% endif %}
+        </ol>
+
+    </div>
+{% endblock %}

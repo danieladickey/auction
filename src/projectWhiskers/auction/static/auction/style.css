@@ -1,0 +1,659 @@
+* {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#backToTop {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: none;
+}
+
+.boxed {
+    padding: 5px;
+    border-style: dashed;
+}
+
+.total {
+    display: inline-block;
+    padding: 5px;
+    border-style: solid;
+}
+
+.errorID {
+    padding: 60px;
+}
+
+.alwaysHidden {
+    display: none;
+}
+
+.blue {
+    color: #262A35;
+}
+
+.mobileOnly {
+    display: none;
+}
+
+#notification {
+    color: white;
+    text-decoration: none;
+    z-index: 10;
+    font-size: 30px;
+    padding: 17px;
+    float: right;
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+#hamburger {
+    z-index: 10;
+    position: relative;
+}
+
+.yellow {
+    color: #B19A4E;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .toolTipText {
+    visibility: hidden;
+    width: 120px;
+    background-color: #262A35;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .toolTipText::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #262A35 transparent;
+}
+
+.tooltip:hover .toolTipText {
+    visibility: visible;
+}
+
+.myError {
+    color: crimson;
+}
+
+.displayIfMobile {
+    display: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+#login {
+    width: 250px;
+    margin: 0 auto;
+}
+
+#logout {
+    width: 180px;
+    margin: 0 auto;
+}
+
+#register {
+    width: 340px;
+    margin: 0 auto;
+}
+
+.viewWhenMobile {
+    display: none;
+}
+
+#mobileHeader {
+    position: relative;
+    color: #B19A4E;
+    font-size: 40px;
+    padding: 10px 15px 10px 10px;
+    text-align: center;
+    top: -70px;
+}
+
+#blueBackground {
+    color: #B19A4E;
+    background-color: #262A35;
+}
+
+.mobileNavigation {
+    display: none;
+}
+
+.myLink {
+    text-decoration: none;
+}
+
+::selection {
+    color: white;
+    background: #B19A4E;
+}
+
+::-moz-selection {
+    color: white;
+    background: #B19A4E;
+}
+
+.inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+select {
+    border-color: #B19A4E;
+    background-color: #262A35;
+    color: #B19A4E;
+    padding: 2px;
+}
+
+.myButton, input[type=button], input[type=submit], input[type=reset], input[type=radio] {
+    color: #262A35;
+    text-decoration: none;
+    background-color: #B19A4E;
+    background-clip: padding-box;
+    padding: 5px;
+    border-radius: 10px;
+    border: 5px solid transparent;
+    font-size: 14px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+label {
+    color: #262A35;
+}
+
+h2, h3, h4, h5 {
+    color: #262A35;
+}
+
+input[type=text], input[type=password], input[type=number], textarea, input[type=date], input[type=time] {
+    border: 2px solid #B19A4E;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, input[type=number]:focus {
+    border: 2px solid #262A35;
+}
+
+.outerForm {
+    text-align: center;
+}
+
+#bump {
+    padding-top: 20px;
+}
+
+#survey {
+    text-align: left;
+    max-width: 500px;
+    display: inline-block;
+}
+
+#adminMenu {
+    padding-top: 12px;
+}
+
+#header {
+    font-size: 30px;
+}
+
+#header a {
+    background-color: #262A35;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 30px;
+    color: #B19A4E;
+    position: fixed;
+    display: block;
+    width: 100%;
+    z-index: 10;
+    text-decoration: none;
+}
+
+.nav ul {
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+    position: fixed;
+    z-index: 9;
+    background: #B19A4E;
+    padding: 118px 0 10px;
+    width: 100%;
+}
+
+.nav ul li {
+    display: inline;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #B19A4E;
+    padding: 10px;
+
+}
+
+.nav ul li a:hover {
+    color: #262A35;
+}
+
+#mySpacer {
+    margin: auto;
+    width: 60%;
+    padding: 165px 0 0;
+    text-align: center;
+}
+
+#myContent {
+    margin: auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+fieldset {
+    padding: 10px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+#idNumber {
+    background-color: #262A35;
+    color: #B19A4E;
+    text-align: center;
+    font-size: 80vh;
+}
+
+#x {
+    color: white;
+    font-size: 5vh;
+    padding-left: 10px;
+    text-decoration: none;
+    position: absolute;
+}
+
+#silent {
+    float: left;
+    width: 320px;
+}
+
+#live {
+    float: right;
+    width: 320px;
+}
+
+.description {
+    text-align: justify;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#aaron {
+    width: 200px;
+    height: auto;
+}
+
+#X {
+    color: black;
+    font-size: 40px;
+    padding-left: 20px;
+    text-decoration: none;
+}
+
+#white {
+    color: white;
+}
+
+#instructions {
+    padding: 30px;
+}
+
+.auctionType {
+    color: #262A35;
+    background-color: #B19A4E;
+}
+
+#description {
+    width: 98%;
+}
+
+img {
+    max-height: 300px;
+    width: auto;
+    max-width: 100%;
+}
+
+.item {
+    background-color: #262A35;
+    color: lightgray;
+}
+
+.top {
+    padding-top: 10px;
+}
+
+.info {
+    text-align: justify;
+    padding: 10px 10px 10px 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 470px;
+    min-width: 300px;
+    max-width: 94%;
+}
+
+.myBox {
+    display: inline-block;
+    width: 315px;
+}
+
+.photo {
+    padding: 10px 5px 10px 10px;
+    width: 300px;
+    text-align: center;
+    display: inline-block;
+}
+
+.bidNumber {
+    width: 70px;
+}
+
+.myBid {
+    display: inline-block;
+    padding: 5px 10px 0 10px;
+    width: 90%;
+    text-align: center;
+}
+
+.addWinner {
+    padding: 10px;
+    text-align: center;
+    background-color: #B19A4E;
+    display: inline-block;
+    min-width: 280px;
+    color: white;
+}
+
+#myTable {
+    width: 100%;
+    text-align: left;
+}
+
+.myHun {
+    width: 95%;
+}
+
+.myFrame {
+    padding: 0 5px 10px 10px;
+    display: inline-block;
+}
+
+.linkLink {
+    text-decoration: none;
+}
+
+.white {
+    color: #B19A4E;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .top {
+        display: none;
+    }
+
+    .equal {
+        padding-left: 0;
+    }
+
+    #live {
+        float: none;
+        width: auto;
+        padding: 0;
+    }
+
+    #silent {
+        float: none;
+        width: auto;
+        padding: 0;
+    }
+
+    .item {
+        text-align: center;
+    }
+
+    #bump {
+        padding-top: 20px;
+    }
+
+    #header a {
+        font-size: 20px;
+        padding: 10px 0;
+    }
+
+    .nav ul {
+        padding-top: 75px;
+    }
+
+    #mySpacer {
+        padding-top: 120px;
+    }
+
+    #myContent {
+        width: 80%
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .tooBig {
+        display: none;
+    }
+
+    #header a {
+        font-size: 12px;
+    }
+
+    .nav ul {
+        padding-top: 58px;
+    }
+
+    #mySpacer {
+        padding-top: 40px;
+    }
+
+    #myContent {
+        width: 95%;
+    }
+}
+
+@media only screen and (max-device-width: 600px), (max-width: 950px) {
+
+    .errorID {
+        padding-top: 200px;
+        font-size: 40px;
+    }
+
+    .mobileNavigation {
+        display: block;
+        width: 100%;
+        background-color: #262A35;
+        height: 68px;
+    }
+
+    .mobileOnly {
+        display: flex;
+    }
+
+    .displayIfMobile {
+        display: inline-block;
+    }
+
+    .ham {
+        width: 35px;
+        height: 4px;
+        background-color: #B19A4E;
+        margin: 6px 0;
+    }
+
+    #header a {
+        font-size: 10px;
+    }
+
+    .nav ul {
+        padding-top: 52px;
+        padding-bottom: 10px;
+    }
+
+    #mySpacer {
+        padding-top: 20px;
+    }
+
+    #idNumber {
+        writing-mode: vertical-rl;
+        font-size: 110vw;
+    }
+
+    #x {
+        font-size: 15vw;
+        padding-left: 60px;
+    }
+
+    .hiddenWhenMobile {
+        display: none;
+    }
+
+    #bump {
+        padding-top: 0;
+    }
+
+    .tooBig {
+        display: none;
+    }
+}
+
+.dropButton {
+    background-color: #262A35;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.subButton {
+    background-color: #262A35;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    width: 130px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.sub {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #B19A4E;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.sub-content {
+    display: none;
+    position: absolute;
+    background-color: #B19A4E;
+    min-width: 160px;
+    z-index: 1;
+    left: 160px;
+    top: 0;
+}
+
+.dropdown-content a {
+    color: white;
+    background-color: #B19A4E;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.sub-content a {
+    color: white;
+    background-color: #B19A4E;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    color: #262A35;
+}
+
+sub-content a:hover {
+    color: #262A35;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.sub:hover .sub-content {
+    display: block;
+}
+
+.dropdown:hover .dropButton {
+    color: #262A35;
+}
+
+.sub:hover .subButton {
+    color: #262A35;
+}
+
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
+    @page {
+        size: A4;
+    }
+}

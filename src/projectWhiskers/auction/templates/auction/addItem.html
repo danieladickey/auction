@@ -1,0 +1,60 @@
+{% extends 'auction/manager.html' %}
+{% load static %}
+
+{% block title %}
+    Add Item
+{% endblock %}
+
+{% block center %}
+
+    <div name="addItems">
+        {% if messageItem %}<p class="myError"><strong>{{ messageItem }}</strong></p>{% endif %}
+
+        <h4>Add an Item to an Auction:</h4><br>
+        <form method="post" action="{% url 'auction:addItem' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>
+                <select name="auction">
+                    {% for i in auction %}
+                        <option value="{{ i.id }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </label><br><br>
+
+            Name of item<br>
+            <label>
+                <input type="text" name="itemName" required>
+            </label><br><br>
+
+            Base price of item<br>
+            <label>
+                <input type="number" name="startingPrice" placeholder="$" min="0" step="any" required>
+            </label><br><br>
+
+            <label>
+                <input type="radio" name="auctionType" value="silent" required>
+            </label>Silent Auction<br>
+            <label>
+                <input type="radio" name="auctionType" value="live" required>
+            </label>Live Auction<br><br>
+
+            Description of item<br>
+            <label for="description"></label><textarea id="description" rows="5" name="description" required></textarea><br><br>
+
+            <div class="alwaysHidden">
+                Enter some descriptive keywords.<br>
+                <label>
+                    <textarea placeholder="Keywords" name="keywords"></textarea>
+                </label><br><br>
+            </div>
+            Upload an image:<br>
+        <label class="myButton" for="file">Choose File</label>
+            <input class="inputFile" id="file" type="file" name="photo" accept=".png, .jpg, image/*" required><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+        <br>
+    </div>
+
+{% endblock %}

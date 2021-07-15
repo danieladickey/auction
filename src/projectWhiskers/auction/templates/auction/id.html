@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'auction/style.css' %}">
+    <link rel="icon" href="{% static 'auction/images/eagle.png' %}">
+    <title>Auction - ID</title>
+    <style>
+        body {
+            background-color: #262A35
+        }
+    </style>
+</head>
+<body>
+
+<a id="x" href="javascript:history.go(-1);">x</a>
+{% if user.bidder %}
+    <h1 id="idNumber">{{ user.bidder.id }}</h1>
+{% else %}
+    <div class="myError errorID">
+    <p>You are not registered for any active auctions.</p>
+    <p>Speak to your auction manager to sign up.</p>
+    </div>
+{% endif %}
+</body>
+

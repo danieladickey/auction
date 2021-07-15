@@ -1,0 +1,44 @@
+{% extends "auction/user.html" %}
+{% load static %}
+
+{% block title %}
+    Manager
+{% endblock %}
+
+{% block id %}
+    Manager
+{% endblock %}
+
+{% block center %}
+    {% if auction.count > 0 %}
+    <form method="post" action="{% url 'auction:endAuction' %}">
+        {% csrf_token %}
+
+        <h4>End Auction:</h4><br>
+        <label>
+            <select name="auction">
+                {% for i in auction %}
+                    <option value="{{ i.id }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+        </label><br><br>
+        <input type="submit" value="End">
+    </form><br><br>
+
+    <form method="post" action="{% url 'auction:report' %}">
+        {% csrf_token %}
+        <h4>Generate Auction Report:</h4><br>
+        <label>
+            <select name="auction">
+                {% for i in auction %}
+                    <option value="{{ i.id }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+        </label><br><br>
+        <input type="submit" value="Generate">
+
+    </form>
+    {% else %}
+    <h4>There are no auctions to end or generate reports for.</h4>
+    {% endif %}
+{% endblock %}

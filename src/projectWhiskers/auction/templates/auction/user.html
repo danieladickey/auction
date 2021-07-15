@@ -1,0 +1,57 @@
+{% extends "auction/nav.html" %}
+{% load static %}
+
+{% block title %}
+    User
+{% endblock %}
+
+
+{% block additional %}
+    <div id="adminMenu">
+        {% if user.manager %}
+            <li><a href="{% url 'auction:addAuction' %}">Add Auction</a></li>
+            <li><a href="{% url 'auction:addBidder' %}">Add Bidder</a></li>
+            <li><a href="{% url 'auction:removeBidder' %}">Remove Bidders</a></li>
+            <li><a href="{% url 'auction:addItem' %}">Add Item</a></li>
+            <li><a href="{% url 'auction:liveItemWinner' %}">Add Winners</a></li>
+        {% endif %}
+        <li><a href="{% url 'auction:myBidding' %}">My Bidding</a></li>
+        <li><a href="{% url 'auction:myWinning' %}">My Winning</a></li>
+        <li><a href="{% url 'auction:myWon' %}">My Won</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <h1 id="bump"></h1>
+    <div class="userName">
+        <h3>
+            Welcome {{ user.username }} (Bidder #{{ user.bidder.id }})
+        </h3><br>
+    </div>
+    <div>
+        {% block center %}
+
+        {% endblock %}
+    </div>
+
+    {% if isUser %}
+        <h4>Notification(s):</h4><br>
+        <ul>
+            {% for notification in notifications %}
+                {% if notification.liveItem == None %}
+                <li><a class="myLink myError"
+                       href="{% url 'auction:viewItem' notification.item.id notification.item.itemType %}">{{ notification }}</a>
+                </li>
+                {% else %}
+                <li><a class="myLink myError"
+                    href="{% url 'auction:viewItem' notification.liveItem.id notification.liveItem.itemType %}">{{ notification }}</a>
+                </li>
+                {% endif %}
+                <br>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

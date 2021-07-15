@@ -1,0 +1,108 @@
+{% extends "auction/nav.html" %}
+{% load static %}
+
+{% block title %}
+    All Items
+{% endblock %}
+
+{% block content %}
+
+    <a id="backToTop" class="myButton" href="#top">Back to top</a>
+
+    <div class="center">
+        <form action="{% url 'auction:allItems' 0 0%}" method="post">
+            {% csrf_token %}
+            <label>
+                <select name="auctionType">
+                    <option value="all">Auction type</option>
+                    <option value="all">All Items</option>
+                    <option value="silent">Silent</option>
+                    <option value="live">Live</option>
+                </select>
+            </label>
+
+            <label>
+                <select name="priceFilter">
+                    <option value="0">Price</option>
+                    <option value="0">All</option>
+                    <option value="9">0-$10</option>
+                    <option value="10">$10-$50</option>
+                    <option value="50">$50-$100</option>
+                    <option value="100">$100-$1000</option>
+                    <option value="101">$1000 and above</option>
+                </select>
+            </label>
+
+            <label>
+                <select name="numberOfItems">
+                    <option value="10">Number of Items</option>
+                    <option value="0">All</option>
+                    <option value="10">10</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </label>
+
+            <input type="submit" value="Filter">
+        </form>
+    </div>
+    <br>
+
+    <div>
+        <div id="silent">
+            <a class="myLink center" href="{% url 'auction:silentItem' 0 0%}"><h2 class="auctionType">Silent Auction
+                Items</h2><br></a>
+            {% for i in silent %}
+                <a class="linkLink" href="{% url 'auction:viewItem' i.id i.itemType %}">
+                    <div class="item">
+                        <div class="photo">
+                            <img src="{{ i.photo.url }}" alt="Photo of {{ item.name }}">
+                        </div>
+                        <div class="equal">
+                            <div class="info">
+                                <b class="white">Item:</b> {{ i.name }} <br>
+                                <b class="white">Price:</b> ${{ i.currentPrice }} <br>
+                                <b class="white">Auction:</b> Silent <br>
+                                <b class="white">Description:</b> {{ i.description }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <br><br>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id='live'>
+        <a class="myLink center" href="{% url 'auction:liveItem' 0 0%}"><h2 class="auctionType">Live Auction Items</h2>
+            <br></a>
+        {% for i in live %}
+            <a class="linkLink" href="{% url 'auction:viewItem' i.id i.itemType %}">
+                <div class="item">
+                    <div class="photo">
+                        <img src="{{ i.photo.url }}" alt="Photo of {{ item.name }}">
+                    </div>
+                    <div class="equal">
+                        <div class="info">
+                            <b class="white">Item:</b> {{ i.name }} <br>
+                            <b class="white">Price:</b> ${{ i.startingPrice }} <br>
+                            <b class="white">Auction:</b> Live <br>
+                            <b class="white">Order:</b> {{ i.positionInAuction }} <br>
+                            <b class="white">Description:</b> {{ i.description }} <br>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <br><br>
+        {% endfor %}
+    </div>
+    <script>
+        for (let i = 0; i < document.getElementsByClassName('info').length; i++) {
+            document.getElementsByClassName('info')[i].style.padding = "0px 10px 10px 10px";
+        }
+        for (let i = 0; i < document.getElementsByClassName('photo').length; i++) {
+            document.getElementsByClassName('photo')[i].style.padding = "10px 10px 5px 10px";
+        }
+    </script>
+{% endblock %}

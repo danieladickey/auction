@@ -1,0 +1,23 @@
+{% extends 'auction/user.html' %}
+{% load static %}
+
+{% block title %}
+    Current Bidding
+{% endblock %}
+
+{% block center %}
+    <div name="currentBid">
+        <h4 class="myList">Items I have bid on:</h4><br>
+        <ol>
+            {% if user.bidder.itemsBidOn.all.count > 0 %}
+                {% for item in user.bidder.itemsBidOn.all %}
+                    <li><a class="myLink blue" href="{% url 'auction:viewItem' item.id item.itemType %}">{{ item.name }} -
+                        ${{ item.currentPrice }}</a></li>
+                    <br>
+                {% endfor %}
+            {% else %}
+                <h5>I have not bid on any items.</h5>
+            {% endif %}
+        </ol>
+    </div>
+{% endblock %}

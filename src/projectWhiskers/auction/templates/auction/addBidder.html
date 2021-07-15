@@ -1,0 +1,34 @@
+{% extends 'auction/manager.html' %}
+{% load static %}
+
+{% block title %}
+    Add Bidder
+{% endblock %}
+
+{% block center %}
+
+    <div name="addBidders">
+        {% if messageUser %}<p><strong>{{ messageUser }}</strong></p>{% endif %}
+
+        <h4>Register a Bidder to an Auction:</h4><br>
+        <form method="post" action="{% url 'auction:addBidder' %}">
+            {% csrf_token %}
+            Username<br>
+            <label>
+                <input type="text" name="username" required>
+            </label><br><br>
+
+            Which auction is this?<br>
+            <label>
+                <select name="auctionName">
+                    {% for i in auction %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </label><br><br>
+            <input type="Submit" value="Submit">
+        </form>
+        <br>
+    </div>
+
+{% endblock %}
